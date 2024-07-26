@@ -64,8 +64,14 @@
       39,
       40
     ],
-    "visible_layers": "dfcffff_ffffffff",
+    "visible_layers": "dd4ffff_ffffffff",
     "zone_display_mode": 0
+  },
+  "git": {
+    "repo_password": "",
+    "repo_type": "",
+    "repo_username": "",
+    "ssh_key": ""
   },
   "meta": {
     "filename": "line-follower.kicad_prl",
