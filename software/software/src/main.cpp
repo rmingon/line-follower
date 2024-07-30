@@ -29,9 +29,12 @@
 
 // 
 
+bool run = false;
+
 void setup() {
   pinMode(PIN_PA3, OUTPUT);
   pinMode(BUTTON, INPUT);
+  pinMode(FAN, OUTPUT);
 
   pinMode(LEDS, OUTPUT);
   
@@ -54,13 +57,24 @@ void setup() {
 void loop() {
   if (digitalRead(BUTTON)) {
     delay(300);
-    analogWrite(MOTOR_L_A, 40);
-    analogWrite(MOTOR_R_A, 40);
+    run = !run;
   }
-  int value = analogRead(IR3);
-  if (value < SENSITIVITY) {
-    digitalWrite(PIN_PA3, LOW);
+  if (run) {
+    analogWrite(FAN, 10);
+    int ir4 = analogRead(IR4);
+    if (ir4 < SENSITIVITY) {
+      analogWrite(MOTOR_L_A, 10);
+    } else {
+      analogWrite(MOTOR_L_A, 0);
+    }
+    int ir5 = analogRead(IR5);
+    if (ir5 < SENSITIVITY) {
+      analogWrite(MOTOR_R_A, 10);
+    } else {
+      analogWrite(MOTOR_R_A, 0);
+    }
   } else {
-    digitalWrite(PIN_PA3, HIGH);
+    analogWrite(FAN, 0);
   }
+
 }
