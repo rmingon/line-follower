@@ -60,16 +60,16 @@ void loop() {
     run = !run;
   }
   if (run) {
-    analogWrite(FAN, 10);
+    // analogWrite(FAN, 10);
     int ir4 = analogRead(IR4);
     if (ir4 < SENSITIVITY) {
-      analogWrite(MOTOR_L_A, 10);
+      analogWrite(MOTOR_L_B, 255);
     } else {
-      analogWrite(MOTOR_L_A, 0);
+      analogWrite(MOTOR_L_B, 0);
     }
     int ir5 = analogRead(IR5);
     if (ir5 < SENSITIVITY) {
-      analogWrite(MOTOR_R_A, 10);
+      analogWrite(MOTOR_R_A, 255);
     } else {
       analogWrite(MOTOR_R_A, 0);
     }
