@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#define SENSITIVITY 100
+#define SENSITIVITY 80
 
 // IR PIN LEFT TO RIGHT
 #define IR0 PIN_PF0
@@ -16,7 +16,7 @@
 
 #define FAN PIN_PB4
 
-// MX1208
+// MX1508
 #define MOTOR_L_A PIN_PH3
 #define MOTOR_L_B PIN_PH4
 #define MOTOR_R_A PIN_PH5
@@ -26,8 +26,6 @@
 #define LEDS PIN_PK2
 
 #define BUTTON PIN_PK3
-
-// 
 
 bool run = false;
 
@@ -47,7 +45,6 @@ void setup() {
   analogWrite(MOTOR_R_A, 0);
   analogWrite(MOTOR_R_B, 0);
   
-  digitalWrite(LEDS, HIGH);
   pinMode(IR3, INPUT);
   pinMode(IR4, INPUT);
   pinMode(IR5, INPUT);
@@ -61,20 +58,29 @@ void loop() {
   }
   if (run) {
     // analogWrite(FAN, 10);
+    
+    digitalWrite(LEDS, HIGH);
     int ir4 = analogRead(IR4);
-    if (ir4 < SENSITIVITY) {
-      analogWrite(MOTOR_L_B, 255);
+    if (ir4 > SENSITIVITY) {
+      analogWrite(MOTOR_L_B, 60);
     } else {
       analogWrite(MOTOR_L_B, 0);
     }
     int ir5 = analogRead(IR5);
-    if (ir5 < SENSITIVITY) {
-      analogWrite(MOTOR_R_A, 255);
+    if (ir5 > SENSITIVITY) {
+      analogWrite(MOTOR_R_A, 60);
     } else {
       analogWrite(MOTOR_R_A, 0);
     }
+
   } else {
+    
+    digitalWrite(LEDS, LOW);
     analogWrite(FAN, 0);
+    
+    analogWrite(MOTOR_L_B, 0);
+      
+    analogWrite(MOTOR_R_A, 0);
   }
 
 }
